@@ -8,7 +8,7 @@ This is a sample todo app built with React Native for sole purposes of learning 
 
 ![Image](https://github.com/user-attachments/assets/a17a1c74-7d60-4e19-9f63-311ddda53591)
 
-![App Screenshot](https://drive.google.com/file/d/1LGos6xzAnqoxEqLDcJrxksq-jdyW4VCJ/view?usp=drive_link)
+![Image](https://github.com/user-attachments/assets/b6038bbc-7fed-4211-af03-45c5958a5fe7)
 
 ![App Screenshot](https://drive.google.com/file/d/1hxYZVrxGbIIC89ixozL-NFjytahVa1wT/view?usp=drive_link)
 ## How to run 
