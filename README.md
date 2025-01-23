@@ -6,7 +6,7 @@ This is a sample todo app built with React Native for sole purposes of learning 
 
 ## Screenshots
 
-![App Screenshot](![Image](https://github.com/user-attachments/assets/a17a1c74-7d60-4e19-9f63-311ddda53591))
+![Image](https://github.com/user-attachments/assets/a17a1c74-7d60-4e19-9f63-311ddda53591)
 
 ![App Screenshot](https://drive.google.com/file/d/1LGos6xzAnqoxEqLDcJrxksq-jdyW4VCJ/view?usp=drive_link)
 
