@@ -35,4 +35,5 @@ Now scan the QR code in Expo app and launch the application.
 ## Package Used
 
 [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+[redux-tool-kit](https://redux-toolkit.js.org)
 
