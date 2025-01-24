@@ -5,25 +5,20 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { clearInputText,updateInputText} from './features/textSlice';
-import { updateButtonText} from './features/buttonTextSlice';
 import {addTask, deleteTask} from './features/taskSlice';
 
 const Home = () => {
-  // const [text, setText] = useState('');
-  // const [addedit, setAddedit] = useState('Add Task');
-  // const [tasks, setTasks] = useState([]);
+  const [inputText, setInputText] = useState('');
+  const [buttonText, setButtonText] = useState('Add Task');
+  
   const dispatch=useDispatch();
-  const inputText=useSelector((state)=>state.inputText.value);
-  const buttonText=useSelector((state)=>state.buttonText.value);
-  const task=useSelector((state)=>state.task.value);
-
+  const tasks=useSelector((state)=>state.tasks.tasks);
 
   const handleAddTask = () => {
-    if (inputText.trim()) {
+    if (inputText.trim()){
       dispatch(addTask(inputText));
-      dispatch(clearInputText());
-      dispatch(updateButtonText("ADD TASK"));
+      setInputText('');
+      setButtonText('ADD TASK');
     }
   };
 
@@ -32,9 +27,9 @@ const Home = () => {
   };
 
   const handleEditTask = (index) => {
-    dispatch(updateInputText(task[index]));
+    setInputText(tasks[index]);
     dispatch(deleteTask(index));
-    dispatch(updateButtonText("EDIT TASK"));
+    setButtonText('EDIT TASK');
   };
 
   return (
@@ -47,15 +42,20 @@ const Home = () => {
         style={styles.input}
         value={inputText}
         placeholder="Type here"
-        onChangeText={(inputText)=>{dispatch(updateInputText(inputText))}}
+        onChangeText={(inputText)=>{setInputText(inputText)}}
       />
 
-      <TouchableOpacity style={styles.head} onPress={handleAddTask} ><Text style={styles.headtext}>{buttonText}</Text></TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.head} 
+        onPress={handleAddTask} >
+          <Text style={styles.headtext}>{buttonText}</Text>
+      </TouchableOpacity>
 
       <View style={styles.tasksContainer}>
-        {task.map((task, index) => (
-          <View key={index} style={styles.taskContainer}>
+        {tasks.map((task, index) => (
+          <View key={`${task}-${index}`} style={styles.taskContainer}>
             <Text style={styles.task}>{task}</Text>
+
             <View style={styles.iconContainer}>
               <TouchableOpacity onPress={() => handleEditTask(index)}>
                 <Ionicons name="create-outline" size={20} color="blue" />
