@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './styles'
 
@@ -46,12 +46,12 @@ const Home = () => {
       />
 
       <TouchableOpacity 
-        style={styles.head} 
+        style={styles.button} 
         onPress={handleAddTask} >
-          <Text style={styles.headtext}>{buttonText}</Text>
+          <Text style={styles.buttontext}>{buttonText}</Text>
       </TouchableOpacity>
 
-      <View style={styles.tasksContainer}>
+      <ScrollView contentContainerStyle={styles.tasksContainer}>
         {tasks.map((task, index) => (
           <View key={`${task}-${index}`} style={styles.taskContainer}>
             <Text style={styles.task}>{task}</Text>
@@ -66,8 +66,7 @@ const Home = () => {
             </View>
           </View>
         ))}
-      </View>
-
+      </ScrollView>
     </View>
   );
 }
