@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const buttonTextSlice = createSlice({
-    name:'addedit',
+    name:'buttonText',
     initialState:{
         value:'ADD TASK',
     },
     reducers:{
-        buttonTextUpdate:(state,action)=>{
+        updateButtonText:(state,action)=>{
             state.value=action.payload;
         }
     },
 })
 
 
-export const {buttonTextUpdate}=buttonTextSlice.actions;
+export const {updateButtonText}=buttonTextSlice.actions;
 export default buttonTextSlice.reducer;

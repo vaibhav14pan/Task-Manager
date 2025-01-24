@@ -4,8 +4,8 @@ import buttonTextReducer from '../features/buttonTextSlice'
 import taskReducer from '../features/taskSlice'
 export default configureStore({
   reducer: {
-    text:textReducer,
-    addedit:buttonTextReducer,
+    inputText:textReducer,
+    buttonText:buttonTextReducer,
     task:taskReducer,
   }
 })

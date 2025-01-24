@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const textSlice = createSlice({
-    name:'text',
+    name:'inputText',
     initialState:{
         value:'',
     },
     reducers:{
-        clear:(state)=>{
+        clearInputText:(state)=>{
             state.value="";
         },
-        update:(state,action)=>{
+        updateInputText:(state,action)=>{
             state.value=action.payload;
         }
     },
 })
 
 
-export const {clear,update}=textSlice.actions;
+export const {clearInputText,updateInputText}=textSlice.actions;
 export default textSlice.reducer;

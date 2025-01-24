@@ -2,40 +2,39 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import styles from './styles'
 
 import { useSelector, useDispatch } from 'react-redux';
-import { clear,update} from './features/textSlice';
-import { buttonTextUpdate} from './features/buttonTextSlice';
-import {add, del} from './features/taskSlice';
+import { clearInputText,updateInputText} from './features/textSlice';
+import { updateButtonText} from './features/buttonTextSlice';
+import {addTask, deleteTask} from './features/taskSlice';
 
 const Home = () => {
   // const [text, setText] = useState('');
   // const [addedit, setAddedit] = useState('Add Task');
   // const [tasks, setTasks] = useState([]);
   const dispatch=useDispatch();
-  const text=useSelector((state)=>state.text.value);
-  const addedit=useSelector((state)=>state.addedit.value);
-  const tasks=useSelector((state)=>state.task.value);
+  const inputText=useSelector((state)=>state.inputText.value);
+  const buttonText=useSelector((state)=>state.buttonText.value);
+  const task=useSelector((state)=>state.task.value);
 
 
   const handleAddTask = () => {
-    if (text.trim) {
-      dispatch(add(text));
-      dispatch(clear());
-      dispatch(buttonTextUpdate("ADD TASK"));
+    if (inputText.trim()) {
+      dispatch(addTask(inputText));
+      dispatch(clearInputText());
+      dispatch(updateButtonText("ADD TASK"));
     }
   };
 
   const handleDeleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    dispatch(del(updatedTasks));
+    dispatch(deleteTask(index));
   };
 
   const handleEditTask = (index) => {
-    dispatch(update(tasks[index]));
-    handleDeleteTask(index);
-    dispatch(buttonTextUpdate("EDIT TASK"));
+    dispatch(updateInputText(task[index]));
+    dispatch(deleteTask(index));
+    dispatch(updateButtonText("EDIT TASK"));
   };
 
   return (
@@ -46,15 +45,15 @@ const Home = () => {
 
       <TextInput
         style={styles.input}
-        value={text}
+        value={inputText}
         placeholder="Type here"
-        onChangeText={(text)=>{dispatch(update(text))}}
+        onChangeText={(inputText)=>{dispatch(updateInputText(inputText))}}
       />
 
-      <TouchableOpacity style={styles.head} onPress={handleAddTask} ><Text style={styles.headtext}>{addedit}</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.head} onPress={handleAddTask} ><Text style={styles.headtext}>{buttonText}</Text></TouchableOpacity>
 
       <View style={styles.tasksContainer}>
-        {tasks.map((task, index) => (
+        {task.map((task, index) => (
           <View key={index} style={styles.taskContainer}>
             <Text style={styles.task}>{task}</Text>
             <View style={styles.iconContainer}>
@@ -73,71 +72,6 @@ const Home = () => {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#f5f5f5',
-  },
-  head: {
-    backgroundColor: "black",
-    height: 40,
-    color: "white",
-    width: "40%",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  headtext: {
-    color: "white",
-    fontWeight: "bold",
-
-  },
-  title: {
-    fontSize: 40,
-    fontWeight: "bold",
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-    width: '80%',
-    backgroundColor: '#fff',
-  },
-  tasksContainer: {
-    marginTop: 20,
-    width: '80%',
-  },
-  taskContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 10,
-  },
-  task: {
-    fontSize: 16,
-    color: '#333',
-  },
-  iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-});
 
 
 export default Home;
